@@ -28,12 +28,12 @@ module.exports = function(RED) {
 
             switch (node.config.payloadType) {
               case 'num':
-                payload = parseInt(node.config.payload)
+                payload = parseFloat(node.config.payload)
                 break
 
               case 'json':
                 if (FloureonHelper.isJson(node.config.payload)) {
-                  payload = parseInt(JSON.parse(node.config.payload))
+                  payload = JSON.parse(node.config.payload)
                 } else {
                   node.warn('Incorrect payload. Waiting for valid JSON')
                   node.status({
@@ -48,7 +48,7 @@ module.exports = function(RED) {
                 break
               
               case 'msg':
-                payload = parseInt(msg[node.config.payload])
+                payload = msg[node.config.payload]
                 break
             }
 

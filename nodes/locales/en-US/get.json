@@ -2,7 +2,7 @@
   "label": {
     "name": "Name",
     "server": "Server",
-    "property": "Payload output",
+    "property": "Property",
     "refresh": "Refresh",
     "refresh_list": "Refresh List"
   },

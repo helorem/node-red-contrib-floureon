@@ -1,6 +1,6 @@
 {
   "name": "@helorem/node-red-contrib-floureon",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Node Red integration for Floureon thermostats",
   "author": {
     "name": "Romain CONNESSON"

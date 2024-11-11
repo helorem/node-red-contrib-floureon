@@ -151,7 +151,7 @@ module.exports = (RED) => {
       if (!this.connection || !this.device) {
         return
       }
-      this.device.setTemp(value)
+      this.device.setTemp(parseFloat(value))
     }
   }
 
