@@ -76,8 +76,6 @@ module.exports = (RED) => {
         }
       }
 
-      console.log("SEND", payload)
-
       node.send({ payload })
       node.last_value = payload
       

@@ -6,8 +6,6 @@ class FloureonEditor {
     }, config)
     this.properties = undefined
 
-    console.log("CONFIG", config, node)
-
     this.property = node.property || null
     this.refresh = false
     return this
@@ -27,7 +25,6 @@ class FloureonEditor {
   }
 
   async build() {
-    console.log("build")
     this.buildPropertyInput()
     this.bind()
   }
