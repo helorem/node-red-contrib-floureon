@@ -1,0 +1,16 @@
+{
+  "label": {
+    "name": "Name",
+    "server": "Server",
+    "property": "Payload output",
+    "refresh": "Refresh",
+    "refresh_list": "Refresh List",
+    "start_output": "Start output",
+    "start_output_help": "Send value on start",
+    "filter_changes": "Filter",
+    "filter_changes_help": "Send only if value changes"
+  },
+  "placeholder": {
+    "name": "Name"
+  }
+}

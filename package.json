@@ -1,0 +1,36 @@
+{
+  "name": "@helorem/node-red-contrib-floureon",
+  "version": "1.0.0",
+  "description": "Node Red integration for Floureon thermostats",
+  "author": {
+    "name": "Romain CONNESSON"
+  },
+  "license": "GPL",
+  "keywords": [
+    "node-red",
+    "floureon",
+    "beko",
+    "thermostat"
+  ],
+  "node-red": {
+    "version": ">=1.3.0",
+    "nodes": {
+      "in": "nodes/in.js",
+      "get": "nodes/get.js",
+      "out": "nodes/out.js",
+      "server": "nodes/server.js",
+      "api": "api.js"
+    }
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "dependencies": {
+    "node-broadlink": "^2.4.0"
+  },
+  "homepage": "https://github.com/helorem/node-red-contrib-floureon",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/helorem/node-red-contrib-floureon.git"
+  }
+}

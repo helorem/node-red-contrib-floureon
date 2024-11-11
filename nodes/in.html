@@ -1,0 +1,81 @@
+<script type="text/x-red" data-template-name="floureon-in">
+    <link rel="stylesheet" href="resources/node-red-contrib-floureon/css/common.css" type="text/css" />
+    <div class="form-row">
+        <label for="node-input-name" class="l-width"><i class="fa fa-bookmark"></i> <span data-i18n="label.name"></span></label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]placeholder.name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-server" class="l-width"><i class="fa fa-globe"></i> <span data-i18n="label.server"></span></label>
+        <input type="text" id="node-input-server">
+    </div>
+    <div class="form-row">
+        <label for="node-input-property" class="l-width"><i class="fa fa-tag"></i> <span data-i18n="label.property"></span></label>
+        <select id="node-input-property" class="s-width"></select>
+    </div>
+    <div class="form-row">
+        <label for="force-refresh" class="l-width"><i class="fa fa-refresh"></i> <span data-i18n="label.refresh"></span></label>
+        <a class="red-ui-button s-width" id="force-refresh" name="force-refresh"><span data-i18n="label.refresh_list"></span></a>
+    </div>
+    <div class="form-row">
+        <label for='node-input-outputAtStartup' class="l-width"><i class='fa fa-share-square'></i> <span data-i18n="label.start_output"></span></label>
+        <input type="checkbox" id="node-input-outputAtStartup" checked="checked" style="display: inline-block; width: auto; vertical-align: top;"> <span data-i18n="label.start_output_help"></span></input>
+    </div>
+    <div class="form-row">
+        <label for='node-input-filterChanges' class="l-width"><i class='fa fa-share-square'></i> <span data-i18n="label.filter_changes"></span></label>
+        <input type="checkbox" id="node-input-filterChanges" checked="checked" style="display: inline-block; width: auto; vertical-align: top;"> <span data-i18n="label.filter_changes_help"></span></input>
+    </div>
+</script>
+
+<script type='text/javascript'>
+  RED.nodes.registerType('floureon-in', {
+    category: 'Floureon',
+    color: '#a6bbcf',
+    defaults: {
+      name: {
+        value: ''
+      },
+      server: {
+        type: 'floureon-server',
+        required: true
+      },
+      property: {
+        value: ''
+      },
+      outputAtStartup: {
+        value: true,
+        required: true
+      },
+      filterChanges: {
+        value: false,
+        required: true
+      }
+    },
+    inputs: 0,
+    outputs: 1,
+    outputLabels: ["value"],
+    paletteLabel: 'in',
+    icon: "icon.png",
+    label: function () {
+      var label = 'floureon-in'
+
+      if (this.name) {
+        label = this.name
+      }
+
+      return label
+    },
+    oneditprepare: function () {
+      let node = this
+
+      setTimeout(() => {
+        new FloureonEditor(node, {
+          'allow_empty': true
+        }).build()
+      }, 100) //need timeout to load server node
+    },
+    oneditsave: function () {
+      let $property = $('#node-input-property')
+      this.property = $property.val() !== '0' ? $property.val() : null
+    }
+  })
+</script>

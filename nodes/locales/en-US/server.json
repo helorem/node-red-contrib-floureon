@@ -1,0 +1,20 @@
+{
+  "label": {
+    "name": "Name",
+    "host": "Host",
+    "port": "Port",
+    "mac": "MAC"
+  },
+  "placeholder": {
+    "name": "Name"
+  },
+  "status": {
+    "no_server": "no server",
+    "no_connection": "no connection",
+    "received": "ok"
+  },
+  "editor": {
+    "nothing": "Nothing",
+    "complete_payload": "Complete payload"
+  }
+}

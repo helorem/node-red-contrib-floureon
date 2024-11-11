@@ -1,0 +1,12 @@
+{
+  "label": {
+    "name": "Name",
+    "server": "Server",
+    "property": "Payload output",
+    "refresh": "Refresh",
+    "refresh_list": "Refresh List"
+  },
+  "placeholder": {
+    "name": "Name"
+  }
+}

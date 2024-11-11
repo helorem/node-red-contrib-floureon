@@ -1,0 +1,11 @@
+{
+  "label": {
+    "name": "Name",
+    "server": "Server",
+    "command": "Command",
+    "payload": "Payload"
+  },
+  "placeholder": {
+    "name": "Name"
+  }
+}

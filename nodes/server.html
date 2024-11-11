@@ -1,0 +1,47 @@
+<script type="text/x-red" data-template-name="floureon-server">
+    <link rel="stylesheet" href="resources/node-red-contrib-floureon/css/common.css" type="text/css" />
+    <div class="form-row">
+        <label for="node-config-input-name" class="l-width"><span data-i18n="label.name"></span></label>
+        <input type="text" id="node-config-input-name">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-host" class="l-width"><span data-i18n="label.host"></span></label>
+        <input type="text" id="node-config-input-host">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-port" class="l-width"><span data-i18n="label.port"></span></label>
+        <input type="text" id="node-config-input-port" placeholder="80">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-mac" class="l-width"><span data-i18n="label.mac"></span></label>
+        <input type="text" id="node-config-input-mac">
+    </div>
+</script>
+
+<script type='text/javascript'>
+  RED.nodes.registerType('floureon-server', {
+    category: 'config',
+    defaults: {
+      name: {
+        value: null,
+        required: false
+      },
+      host: {
+        value: null,
+        required: true
+      },
+      port: {
+        value: 80,
+        required: false,
+        validate: RED.validators.number()
+      },
+      mac: {
+        value: null,
+        required: true
+      },
+    },
+    label: function () {
+      return this.name || this.host;
+    }
+  });
+</script>

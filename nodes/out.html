@@ -1,0 +1,123 @@
+<script type="text/x-red" data-template-name="floureon-out">
+  <link rel="stylesheet" href="resources/node-red-contrib-floureon/css/common.css" type="text/css" />
+
+  <div class="form-row">
+    <label for="node-input-name" class="l-width"><i class="fa fa-bookmark"></i> <span data-i18n="label.name"></span></label>
+    <input type="text" id="node-input-name" data-i18n="[placeholder]placeholder.name">
+  </div>
+  <div class="form-row">
+    <label for="node-input-server" class="l-width"><i class="fa fa-globe"></i> <span data-i18n="label.server"></span></label>
+    <input type="text" id="node-input-server">
+  </div>
+  <div class="form-row">
+    <label for="node-input-command" class="l-width"><i class="fa fa-tasks"></i> <span data-i18n="label.command"></span></label>
+    <input type="text" id="node-input-command" style="width:70%">
+    <input type="hidden" id="node-input-commandType">
+  </div>
+  <div class="form-row">
+    <label for="node-input-payload" class="l-width"><i class="fa fa-envelope"></i> <span data-i18n="label.payload"></span></label>
+    <input type="text" id="node-input-payload" style="width:70%">
+    <input type="hidden" id="node-input-payloadType">
+  </div>
+</script>
+
+<script type='text/javascript'>
+  RED.nodes.registerType('floureon-out', {
+    category: 'Floureon',
+    color: '#a6bbcf',
+    align: 'right',
+    defaults: {
+      name: {
+        value: ""
+      },
+      server: {
+        type: "floureon-server",
+        required: true
+      },
+      command: {
+        value: '',
+      },
+      commandType: {
+        value: '',
+      },
+      payload: {
+        value: 'payload',
+      },
+      payloadType: {
+        value: 'msg',
+      },
+    },
+    inputLabels: "value",
+    paletteLabel: 'out',
+    inputs: 1,
+    outputs: 0,
+    icon: "icon.png",
+    label: function () {
+      var label = 'floureon-out'
+
+      if (this.name) {
+        label = this.name
+      }
+      return label
+    },
+    oneditprepare: function () {
+      let node = this
+      let $inputCommand = $('#node-input-command')
+      let $inputCommandType = $('#node-input-commandType')
+
+      new FloureonEditor(node, {
+        'allow_empty': true
+      }).build()
+
+      buildTypesInput()
+
+      $inputCommand.on('change', function (event, type, value) {
+        $('#node-input-payload').typedInput('types', getPayloadTypes(value))
+
+        //show/hide
+        if ('nothing' === type) {
+          $('#node-input-payload').closest('.form-row').hide()
+        } else {
+          $('#node-input-payload').closest('.form-row').show()
+        }
+      })
+
+
+      //init typedInput
+      $('#node-input-payload').typedInput({
+        types: getPayloadTypes(node.command),
+        default: 'num',
+        value: '20',
+        typeField: $('#node-input-payloadType'),
+      })
+      $inputCommandType.val(node.commandType)
+      $('#node-input-payloadType').val(node.payloadType)
+
+      function buildTypesInput() {
+        $('#node-input-command').typedInput({
+          types: getCommandTypes(),
+          default: 'floureon_cmd',
+          value: 'setTemperature',
+          typeField: $('#node-input-commandType'),
+        })
+      }
+
+      function getCommandTypes() {
+        return [
+          {
+            value: 'floureon_cmd',
+            label: 'floureon',
+            icon: 'icons/node-red-contrib-floureon/icon.png',
+            options: [
+              { 'value': 'setTemperature', 'label': 'Set temperature' },
+            ]
+          }
+        ]
+      }
+
+      function getPayloadTypes(command) {
+        return ['msg', 'str', 'num', 'json']
+      }
+    }
+  })
+</script>
