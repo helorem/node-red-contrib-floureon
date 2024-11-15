@@ -34,7 +34,7 @@ module.exports = (RED) => {
           that.launchCheck()
         })
       } catch (ex) {
-        console.error(ex)
+        console.error("Cannot connect broalink", ex)
       }
     }
 
@@ -42,9 +42,14 @@ module.exports = (RED) => {
       if (!this.connection || !this.device) {
         return
       }
-      this.device.getFullStatus().then((data) => {
-        done(data)
-      })
+      try {
+        this.device.getFullStatus().then((data) => {
+          done(data)
+        })
+      } catch(ex) {
+        console.error("Cannot get full status", ex)
+        done(undefined)
+      }
     }
 
     nodeSend(node, fullPayload) {
@@ -151,7 +156,11 @@ module.exports = (RED) => {
       if (!this.connection || !this.device) {
         return
       }
-      this.device.setTemp(parseFloat(value))
+      try {
+        this.device.setTemp(parseFloat(value))
+      } catch(ex) {
+        console.error("Cannot set temperature", ex)
+      }
     }
   }
 
